@@ -73,8 +73,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     subjects_dir = args.subjects_dir
     subjects_ids_filename = args.subject_ids
-    f = open(subjects_dir+subjects_ids_filename, "r") 
-    subjects_ids = [line.rstrip('\n') for line in f] 
+	subject_ids=np.loadtxt(subject_dir+subject_ids_filename, dtype='str',ndmin=1)
 
     #process data 
     #TODO add a loop for processing more than 1 subject

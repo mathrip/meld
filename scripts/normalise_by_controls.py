@@ -25,7 +25,7 @@ args = parser.parse_args()
 #save subjects dir and subject ids. import the text file containing subject ids
 subject_dir=args.subject_dir
 subject_id_filename=args.subject_ids
-subject_ids=np.loadtxt(subject_dir + subject_id_filename,dtype='str')
+subject_ids=np.loadtxt(subject_dir + subject_id_filename,dtype='str',ndmin=1)
 control_dir=args.control_dir
 hemis=['lh','rh']
 cortex=nb.freesurfer.io.read_label(subject_dir + 'fsaverage_sym/label/lh.cortex.label')
