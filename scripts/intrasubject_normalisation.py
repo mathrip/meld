@@ -43,6 +43,7 @@ for h in hemis:
         for m in measures:
             if not os.path.isfile(os.path.join(subject_dir , s , 'surf_meld',h+'.intra_z'+m)):
                 subject_measure=io.load_mgh(os.path.join(subject_dir,s,'surf_meld',h+m))
+                #TODO WARNING in python2 '/' gives integers if inputs are integers
                 z_measure=(subject_measure-np.mean(subject_measure[cortex]))/np.std(subject_measure[cortex])
                 io.save_mgh(os.path.join(subject_dir,s,'surf_meld',h+'.intra_z'+m),z_measure,demo)
         #only do FLAIR measures if present

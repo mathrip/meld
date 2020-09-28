@@ -79,7 +79,7 @@ def load_subject_features(fs_id,features,subject_number,medial_wall,subjects_dir
 def get_sitecode(fs_id):
     site_code=fs_id.split('_')[1]
     if site_code[0] != 'H':
-        print 'site code from subject id does not fit format "H<num>". please double check'
+        print('site code from subject id does not fit format "H<num>". please double check')
         site_code='false'
     return site_code
 
@@ -90,8 +90,8 @@ def get_cp(fs_id):
     elif cp in ("C" , "c"):
         c_p='control'
     else:
-        print 'subject '+ fs_id + ' cannot be identified as either patient or control...'
-        print 'Please double check the IDs in the list of subjects'
+        print('subject '+ fs_id + ' cannot be identified as either patient or control...')
+        print('Please double check the IDs in the list of subjects')
         c_p='false'
     return c_p
 
@@ -102,8 +102,8 @@ def get_scanner(fs_id):
     elif sc in ("3T" , "3t" ):
         scanner="3T"
     else:
-        print 'scanner for subject '+ fs_id + ' cannot be identified as either 1.5T or 3T...'
-        print 'Please double check the IDs in the list of subjects'
+        print('scanner for subject '+ fs_id + ' cannot be identified as either 1.5T or 3T...')
+        print('Please double check the IDs in the list of subjects')
         scanner='false'
     return scanner
 
@@ -115,7 +115,7 @@ def save_subject(fs_id,features,medial_wall,subject_dir):
     site_code=get_sitecode(fs_id)
     #skip subject if info not available
     if 'false' in (c_p, scanner, site_code):
-        print "Skipping subject " + fs_id
+        print("Skipping subject " + fs_id)
     hemis=['lh','rh']
     f=h5py.File(os.path.join(subject_dir,site_code+"_"+c_p+"_featurematrix.hdf5"))
     for h in hemis:

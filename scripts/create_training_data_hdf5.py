@@ -51,7 +51,7 @@ medial_wall = np.delete(np.arange(n_vert),cortex_label)
 
 
 for subject in subject_ids:
-    print "saving subject " + subject + "..."
+    print("saving subject " + subject + "...")
     io.save_subject(subject,features,medial_wall,subject_dir)
 
 
