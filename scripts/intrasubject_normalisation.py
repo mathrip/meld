@@ -26,7 +26,7 @@ args = parser.parse_args()
 #save subjects dir and subject ids. import the text file containing subject ids
 subject_dir=args.subject_dir
 subject_ids_filename=args.subject_ids
-subject_ids=np.loadtxt(os.path.join(subject_dir,subject_ids_filename), dtype='str')
+subject_ids=np.loadtxt(os.path.join(subject_dir,subject_ids_filename), dtype='str',ndmin=1)
 
 measures=['.thickness.sm10.mgh', '.w-g.pct.sm10.mgh',
     '.pial.K_filtered.sm20.mgh']
