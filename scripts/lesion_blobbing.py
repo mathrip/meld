@@ -38,12 +38,12 @@ def defrag_surface(lesion,surface):
     #shrinking stage. remove edge vertices
         out=np.concatenate(new_patch).ravel()
         patch=np.unique(out)
-    not_patch=np.setdiff1d(range(len(neighbours)),patch)
+    not_patch=np.setdiff1d(list(range(len(neighbours))),patch)
     for k in range(steps):
         new_not_patch=neighbours[not_patch]
         out=np.concatenate(new_not_patch).ravel()
         not_patch=np.unique(out)
-    patch=np.setdiff1d(range(len(neighbours)),not_patch)
+    patch=np.setdiff1d(list(range(len(neighbours))),not_patch)
     lesion[:]=0
     lesion[patch]=1
     return lesion;
