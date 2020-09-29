@@ -24,7 +24,7 @@ args = parser.parse_args()
 #save subjects dir and subject ids. import the text file containing subject ids
 subject_dir=args.subject_dir
 subject_ids_filename=args.subject_ids
-subject_ids=np.loadtxt(subject_dir+subject_ids_filename, dtype='str', ndmin=1)
+subject_ids=np.loadtxt(os.path.join(subject_dir, subject_ids_filename), dtype='str', ndmin=1)
 
 
 #list features
@@ -44,7 +44,7 @@ features = np.array(['.inter_z.on_lh.intra_z.thickness.sm10.mgh', '.inter_z.asym
     '.on_lh.gm_FLAIR_0.mgh', '.on_lh.wm_FLAIR_0.5.mgh', '.on_lh.wm_FLAIR_1.mgh',
     '.on_lh.pial.K_filtered.sm20.mgh'])
 n_vert=163842
-cortex_label=nb.freesurfer.io.read_label(subject_dir + 'fsaverage_sym/label/lh.cortex.label')
+cortex_label=nb.freesurfer.io.read_label(os.path.join(subject_dir,'fsaverage_sym/label/lh.cortex.label'))
 medial_wall = np.delete(np.arange(n_vert),cortex_label)
 
 

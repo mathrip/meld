@@ -23,16 +23,16 @@ args = parser.parse_args()
 #save subjects dir and subject ids. import the text file containing subject ids
 subject_dir=args.subject_dir
 subject_ids_filename=args.subject_ids
-subject_ids=np.loadtxt(subject_dir+subject_ids_filename, dtype='str',ndmin=1)
+subject_ids=np.loadtxt(os.path.join(subject_dir,subject_ids_filename), dtype='str',ndmin=1)
 
 hemis=['lh','rh']
 
 for h in hemis:
     for s in subject_ids:
-        if not os.path.isfile(subject_dir + s + '/xhemi/surf_meld/'+h+'.pial.K_filtered.mgh'):
-            demo = nb.load(subject_dir+s+'/surf_meld/' + h + '.pial.K.mgh')
-            curvature=io.load_mgh(subject_dir+s+'/surf_meld/' + h + '.pial.K.mgh')
+        if not os.path.isfile(os.path.join(subject_dir, s,'xhemi/surf_meld', h+'.pial.K_filtered.mgh')):
+            demo = nb.load(os.path.join(subject_dir, s, 'surf_meld', h + '.pial.K.mgh'))
+            curvature=io.load_mgh(os.path.join(subject_dir, s, 'surf_meld', h + '.pial.K.mgh'))
             curvature=np.absolute(curvature)
-            io.save_mgh(subject_dir+s+'/surf_meld/'+h+'.pial.K_filtered.mgh',curvature,demo)
+            io.save_mgh(os.path.join(subject_dir, s, 'surf_meld', h+'.pial.K_filtered.mgh'),curvature,demo)
 
 

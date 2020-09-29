@@ -44,12 +44,12 @@ def load_subject_features(fs_id,features,subject_number,medial_wall,subjects_dir
         else :
             hemisphere_feature_matrix[:,1] = np.ones(n_vert)
         #check if FLAIR available
-        if os.path.isfile(subjects_dir + fs_id + '/xhemi/surf_meld/lh.inter_z.on_lh.intra_z.gm_FLAIR_0.75.sm10.mgh'):
+        if os.path.isfile(os.path.join(subjects_dir, fs_id, 'xhemi/surf_meld/lh.inter_z.on_lh.intra_z.gm_FLAIR_0.75.sm10.mgh')):
             FLAIR_flag=1
         else:
             FLAIR_flag=0
         hemisphere_feature_matrix[:,2] = np.ones(n_vert)*FLAIR_flag
-        lesion_label = subjects_dir + fs_id + '/xhemi/surf_meld/' + h +'.on_lh.lesion.mgh'
+        lesion_label = os.path.join(subjects_dir, fs_id, 'xhemi/surf_meld', h +'.on_lh.lesion.mgh')
         if os.path.isfile(lesion_label):
             lesion = import_mgh(lesion_label)
             hemisphere_feature_matrix[:,3] = lesion
@@ -64,7 +64,7 @@ def load_subject_features(fs_id,features,subject_number,medial_wall,subjects_dir
         for f in features:
             f_num+=1
             try :
-                feature = import_mgh(subjects_dir + fs_id + '/xhemi/surf_meld/'+h+f)
+                feature = import_mgh(os.path.join(subjects_dir, fs_id, 'xhemi/surf_meld', h+f))
                 #set medial wall values to zero
                 feature[medial_wall]=0
                 hemisphere_feature_matrix[:,f_num] = feature

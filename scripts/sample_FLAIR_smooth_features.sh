@@ -29,7 +29,7 @@ do
 
   # creates Identidy.dat - a transormation matrix required for sampling intensities with surfaces. In this case an identity matrix as volumes are already coregistered
 #  bbregister --s "$s" --mov "$s" --mov "$s"/mri/brainmask.mgz --reg "$s"/mri/transforms/Identity.dat --init-fsl --t1
-  python "$script_dir"create_identity_reg.py "$s"
+  python "$script_dir"/create_identity_reg.py "$s"
   mkdir "$s"/surf_meld
   H="lh rh"
   #for each hemisphere

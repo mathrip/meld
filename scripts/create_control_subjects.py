@@ -29,7 +29,7 @@ args = parser.parse_args()
 #save subjects dir and subject ids. import the text file containing subject ids
 subject_dir=args.subject_dir
 subject_ids_filename=args.subject_ids
-subject_ids=np.loadtxt(subject_dir+subject_ids_filename, dtype='str',ndmin=1)
+subject_ids=np.loadtxt(os.path.join(subject_dir, subject_ids_filename), dtype='str',ndmin=1)
 control_dir=args.control_dir
 
 #load in demo overlay structure
@@ -46,7 +46,7 @@ flair_measures=['.on_lh.intra_z.gm_FLAIR_0.75.sm10.mgh','.on_lh.intra_z.gm_FLAIR
                 '.asym.on_lh.intra_z.wm_FLAIR_0.5.sm10.mgh','.asym.on_lh.intra_z.wm_FLAIR_1.sm10.mgh']
     
 hemis=['lh','rh']
-demo=nb.load(subject_dir+subject_ids[0]+'/xhemi/surf_meld/'+hemis[0]+measures[0])
+demo=nb.load(os.path.join(subject_dir, subject_ids[0], 'xhemi/surf_meld', hemis[0]+measures[0]))
 
 #run on two field strengths separately
 fields=['3T','15T']
@@ -69,7 +69,7 @@ for f in fields:
             k=-1
             for s in control_subjects:
                 k+=1
-                control_data[k]=io.import_mgh(subject_dir+s+'/xhemi/surf_meld/'+h+m)
+                control_data[k]=io.import_mgh(os.path.join(subject_dir, s, 'xhemi/surf_meld', h+m))
             mean=np.mean(control_data,axis=0)
             std=np.std(control_data,axis=0)
             io.save_mgh(os.path.join(control_dir,f,h+'.mu'+m),mean,demo)
@@ -79,7 +79,7 @@ for f in fields:
 #count how many FLAIR controls
     flair_controls=[]
     for fs_id in control_subjects:
-        if os.path.isfile(subject_dir + fs_id + '/xhemi/surf_meld/lh.on_lh.intra_z.gm_FLAIR_0.75.sm10.mgh'):
+        if os.path.isfile(os.path.join(subject_dir, fs_id, 'xhemi/surf_meld/lh.on_lh.intra_z.gm_FLAIR_0.75.sm10.mgh')):
             flair_controls.append(fs_id)
 
 
@@ -94,7 +94,7 @@ for f in fields:
             k=-1
             for s in flair_controls:
                 k+=1
-                control_data[k]=io.import_mgh(subject_dir+s+'/xhemi/surf_meld/'+h+m)
+                control_data[k]=io.import_mgh(os.path.join(subject_dir, s, 'xhemi/surf_meld', h+m))
             mean=np.mean(control_data,axis=0)
             std=np.std(control_data,axis=0)
             io.save_mgh(os.path.join(control_dir,f,h+'.mu'+m),mean,demo)
